@@ -13,13 +13,25 @@ app.on('ready', () => {
 });
 
 //Each object in menuTemplate refers to each menu dropdown - file edit etc
+//OSX gotcha. first menu item will display as apps name
 const menuTemplate = [
     {
         label: 'File',
         submenu: [
             {
-                label: 'Quit'
+                label: 'New Todo'
+            },
+            {
+                label: 'Quit',
+                click(){
+                    app.quit();
+                }
             }
         ]
     }
 ];
+
+//Checks to see if OSX to add empty object so file menu displays as file
+if (process.platform === 'darwin'){
+    menuTemplate.unshift({});
+}
