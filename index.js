@@ -23,6 +23,7 @@ const menuTemplate = [
             },
             {
                 label: 'Quit',
+                accelerator: 'Command+Q',
                 click(){
                     app.quit();
                 }
