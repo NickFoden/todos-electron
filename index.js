@@ -32,6 +32,7 @@ const menuTemplate = [
         submenu: [
             {
                 label: 'New Todo',
+                accelerator: process.platform === 'darwin' ? 'Command+N' : 'Ctrl+N',
                 click(){createAddWindow();} 
             },
             {
@@ -45,7 +46,22 @@ const menuTemplate = [
     }
 ];
 
-//Checks to see if OSX to add empty object so file menu displays as file
+//Checks to see if OSX to add empty object so file menu displays as "file"
 if (process.platform === 'darwin'){
     menuTemplate.unshift({});
 }
+
+if (process.env.NODE_ENV !== 'production') {
+    menuTemplate.push({
+        label: 'View',
+        submenu : [
+            {
+                label: 'Toggle Developer Tools',
+                click(item, focusedWindow){
+                    focusedWindow.toggleDevTools();
+                }   
+            }
+        ]
+    })
+}
+//Production, development, test, or staging env
